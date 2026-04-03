@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prépa Score IAE-Message — J-1</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #2a2a3a;
+    --accent1: #6c63ff;
+    --accent2: #ff6584;
+    --accent3: #43e97b;
+    --accent4: #f7971e;
+    --text: #e8e8f0;
+    --muted: #8888aa;
+    --radius: 14px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ---- HEADER ---- */
+  .hero {
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1030 50%, #0a0a0f 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 20px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 500px; height: 300px;
+    background: radial-gradient(ellipse, rgba(108,99,255,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(26px, 6vw, 44px);
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff 30%, var(--accent1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.15;
+  }
+  .hero-sub {
+    color: var(--muted);
+    margin-top: 8px;
+    font-size: 14px;
+  }
+  .hero-timer {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,101,132,0.12);
+    border: 1px solid rgba(255,101,132,0.3);
+    border-radius: 8px;
+    padding: 6px 14px;
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--accent2);
+    font-weight: 600;
+  }
+
+  /* ---- NAV TABS ---- */
+  .nav-wrap {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-wrap::-webkit-scrollbar { display: none; }
+  .nav-tabs {
+    display: flex;
+    min-width: max-content;
+    padding: 0 12px;
+  }
+  .tab-btn {
+    flex-shrink: 0;
+    padding: 14px 18px;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: all .2s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--text); }
+  .tab-btn.active[data-tab="culture"] { border-color: var(--accent1); color: var(--accent1); }
+  .tab-btn.active[data-tab="francais"] { border-color: var(--accent2); color: var(--accent2); }
+  .tab-btn.active[data-tab="anglais"] { border-color: var(--accent3); color: var(--accent3); }
+  .tab-btn.active[data-tab="logique"] { border-color: var(--accent4); color: var(--accent4); }
+
+  /* ---- CONTENT ---- */
+  .container { max-width: 860px; margin: 0 auto; padding: 24px 16px 60px; }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; animation: fadeUp .3s ease; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- SECTION HEADER ---- */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .section-icon.c1 { background: rgba(108,99,255,0.15); }
+  .section-icon.c2 { background: rgba(255,101,132,0.15); }
+  .section-icon.c3 { background: rgba(67,233,123,0.15); }
+  .section-icon.c4 { background: rgba(247,151,30,0.15); }
+  .section-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; }
+  .section-desc { font-size: 12px; color: var(--muted); }
+
+  /* ---- CARDS ---- */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .tag-hot { background: rgba(255,101,132,0.2); color: var(--accent2); }
+  .tag-key { background: rgba(108,99,255,0.2); color: var(--accent1); }
+  .tag-tip { background: rgba(67,233,123,0.2); color: var(--accent3); }
+  .tag-math { background: rgba(247,151,30,0.2); color: var(--accent4); }
+
+  /* ---- LISTS ---- */
+  .item-list { list-style: none; }
+  .item-list li {
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .item-list li:last-child { border-bottom: none; }
+  .item-list li::before {
+    content: '›';
+    color: var(--accent1);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ---- VOCAB TABLE (anglais) ---- */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .vocab-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+    gap: 8px;
+  }
+  .vocab-en { font-weight: 600; color: var(--accent3); }
+  .vocab-fr { color: var(--muted); font-size: 12px; }
+
+  /* ---- MATH FORMULA ---- */
+  .formula-box {
+    background: rgba(247,151,30,0.06);
+    border: 1px solid rgba(247,151,30,0.2);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: var(--accent4);
+  }
+  .formula-note { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  /* ---- QUIZ ---- */
+  .quiz-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 14px;
+  }
+  .quiz-q {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-opt {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    font-size: 13px;
+    transition: all .15s;
+    background: transparent;
+    color: var(--text);
+    text-align: left;
+  }
+  .quiz-opt:hover { background: rgba(255,255,255,0.05); border-color: var(--accent1); }
+  .quiz-opt.correct { background: rgba(67,233,123,0.15); border-color: var(--accent3); color: var(--accent3); }
+  .quiz-opt.wrong { background: rgba(255,101,132,0.12); border-color: var(--accent2); color: var(--accent2); }
+  .quiz-feedback {
+    margin-top: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: rgba(108,99,255,0.1);
+    border: 1px solid rgba(108,99,255,0.2);
+    font-size: 13px;
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-next-btn {
+    margin-top: 10px;
+    padding: 8px 20px;
+    background: linear-gradient(135deg, var(--accent1), #9b8ff0);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    display: none;
+  }
+  .quiz-next-btn.show { display: inline-block; }
+
+  /* ---- ACCORDION ---- */
+  .accordion { margin-bottom: 10px; }
+  .accordion-header {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    transition: all .2s;
+  }
+  .accordion-header:hover { border-color: var(--accent1); }
+  .accordion-header.open { border-radius: 10px 10px 0 0; border-bottom-color: transparent; }
+  .accordion-body {
+    display: none;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    padding: 14px 18px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .accordion-body.open { display: block; }
+  .chevron { transition: transform .2s; font-size: 12px; color: var(--muted); }
+  .chevron.open { transform: rotate(180deg); }
+
+  /* ---- PROGRESS / SCORE ---- */
+  .score-bar-wrap { background: rgba(255,255,255,0.06); border-radius: 4px; overflow: hidden; height: 6px; margin-top: 6px; }
+  .score-bar { height: 100%; border-radius: 4px; transition: width .5s ease; }
+
+  /* ---- TIPS HIGHLIGHT ---- */
+  .highlight-box {
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 10px 0;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .highlight-box.warn {
+    background: rgba(247,151,30,0.08);
+    border: 1px solid rgba(247,151,30,0.25);
+  }
+  .highlight-box.info {
+    background: rgba(108,99,255,0.08);
+    border: 1px solid rgba(108,99,255,0.2);
+  }
+  .highlight-box.success {
+    background: rgba(67,233,123,0.07);
+    border: 1px solid rgba(67,233,123,0.2);
+  }
+  .highlight-box strong { font-weight: 600; }
+
+  /* ---- TWO COLUMNS ---- */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media(max-width: 540px) { .two-col { grid-template-columns: 1fr; } .vocab-grid { grid-template-columns: 1fr; } }
+
+  /* ---- SCROLLBAR ---- */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Score IAE — Message</div>
+  <h1>Révisions J-1<br>Prêt pour demain 9h 🎯</h1>
+  <p class="hero-sub">170 questions · 4 épreuves · 3h · Score sur 400 pts</p>
+  <div class="hero-timer">⏰ Concours demain à 9h00 — révise bien ce soir !</div>
+</div>
+
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav-tabs">
+    <button class="tab-btn active" data-tab="culture" onclick="switchTab('culture', this)">🌍 Culture Générale</button>
+    <button class="tab-btn" data-tab="francais" onclick="switchTab('francais', this)">📝 Français</button>
+    <button class="tab-btn" data-tab="anglais" onclick="switchTab('anglais', this)">🇬🇧 Anglais</button>
+    <button class="tab-btn" data-tab="logique" onclick="switchTab('logique', this)">🧮 Logique / Maths</button>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ============ CULTURE GÉNÉRALE ============ -->
+<div id="tab-culture" class="tab-content active">
+  <div class="section-header">
+    <div class="section-icon c1">🌍</div>
+    <div>
+      <div class="section-title">Culture Générale, Économique & Managériale</div>
+      <div class="section-desc">50 questions • 45 min — Actualité 12-24 derniers mois</div>
+    </div>
+  </div>
+
+  <div class="highlight-box warn">
+    <strong>🎯 Ce que le jury évalue :</strong> Ton ouverture d'esprit, ta curiosité, ta connaissance du monde de l'entreprise et de l'actualité économique/politique mondiale. Pas de technicité, mais du bon sens informé !
+  </div>
+
+  <!-- ACTUALITÉS CHAUDES -->
+  <div class="card">
+    <div class="card-title">🔥 Actualités brûlantes 2024–2025 <span class="tag tag-hot">À connaître</span></div>
+    <ul class="item-list">
+      <li><strong>Intelligence Artificielle :</strong> ChatGPT, Gemini, Claude — révolution des usages en entreprise. Loi IA européenne (AI Act) adoptée 2024. 67% des dirigeants veulent adopter des agents IA autonomes en 2025.</li>
+      <li><strong>Inflation & Banque Centrale :</strong> BCE a relevé puis abaissé ses taux directeurs. Inflation en recul mais persistante dans les services. Impact sur le pouvoir d'achat des ménages.</li>
+      <li><strong>Transition écologique :</strong> Directive CSRD (Corporate Sustainability Reporting Directive) — grandes entreprises devront publier un reporting durabilité dès 2028. RSE au cœur des stratégies.</li>
+      <li><strong>Guerre en Ukraine :</strong> Impact sur l'énergie, les céréales, la géopolitique mondiale. Soutien occidental, rôle de l'OTAN.</li>
+      <li><strong>Conflit au Proche-Orient :</strong> Gaza, tensions régionales, enjeux humanitaires et économiques internationaux.</li>
+      <li><strong>Elections mondiales 2024 :</strong> Retour de Trump aux USA, élections en France (législatives), au Royaume-Uni (Labour revenu au pouvoir), UE (parlement européen).</li>
+      <li><strong>JO Paris 2024 :</strong> Impact économique et touristique, image de la France.</li>
+      <li><strong>Réforme des retraites France :</strong> Passage à 64 ans, controverses sociales majeures.</li>
+      <li><strong>Crise des finances publiques françaises :</strong> Déficit > 5% du PIB, plan de rigueur budgétaire, dérapage fiscal debattu.</li>
+      <li><strong>Montée de l'extrême droite en Europe :</strong> Italie (Meloni), Hongrie (Orban), Pays-Bas, France (RN).</li>
+    </ul>
+  </div>
+
+  <!-- ÉCONOMIE MONDIALE -->
+  <div class="card">
+    <div class="card-title">📊 Notions économiques clés <span class="tag tag-key">Fondamentaux</span></div>
+    <div class="two-col">
+      <div>
+        <div class="accordion">
+          <button class="accordion-header" onclick="toggleAccordion(this)">PIB, croissance, récession <span class="chevron">▼</span></button>
+          <div class="accordion-body">
+            <strong>PIB</strong> = valeur totale des biens/services produits dans un pays. Croissance = hausse du PIB. Récession = 2 trimestres consécutifs de baisse. Croissance zone euro ≈ 0,8% en 2024.
+          </div>
+        </div>
+        <div class="accordion">
+          <button class="accordion-header" onclick="toggleAccordion(this)">Inflation & déflation <span class="chevron">▼</span></button>
+          <div class="accordion-body">
+            Inflation = hausse générale des prix. Mesurée par l'IPC (Indice des Prix à la Consommation). Objectif BCE = 2%. Déflation = baisse des prix (dangereux car reporte achats).
+          </div>
+        </div>
+        <div class="accordion">
+          <button class="accordion-header" onclick="toggleAccordion(this)">Politique monétaire <span class="chevron">▼</span></button>
+          <div class="accordion-body">
+            La <strong>BCE</strong> (Banque Centrale Européenne) gère les taux d'intérêt en zone euro. Taux élevé = freine inflation mais freine aussi la croissance. <strong>FED</strong> = banque centrale américaine.
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="accordion">
+          <button class="accordion-header" onclick="toggleAccordion(this)">Mondialisation & commerce <span class="chevron">▼</span></button>
+          <div class="accordion-body">
+            OMC = Organisation Mondiale du Commerce. Balance commerciale = exports - imports. France : déficit commercial persistant. Protectionnisme en hausse (Trump, taxes douanières USA-Chine).
+          </div>
+        </div>
+        <div class="accordion">
+          <button class="accordion-header" onclick="toggleAccordion(this)">Chômage & emploi <span class="chevron">▼</span></button>
+          <div class="accordion-body">
+            Taux de chômage France ≈ 7,3% fin 2024. France Travail (ex-Pôle Emploi) depuis jan. 2024. Plein emploi ≈ objectif de 5%. Chômage structurel vs conjoncturel.
+          </div>
+        </div>
+        <div class="accordion">
+          <button class="accordion-header" onclick="toggleAccordion(this)">Dette publique <span class="chevron">▼</span></button>
+          <div class="accordion-body">
+            Dette France ≈ 110% du PIB. Critères de Maastricht : dette max 60% PIB, déficit max 3%. France en procédure de déficit excessif depuis 2024.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MANAGEMENT -->
+  <div class="card">
+    <div class="card-title">🏢 Management & entreprises <span class="tag tag-key">Clé</span></div>
+    <ul class="item-list">
+      <li><strong>RSE (Responsabilité Sociétale des Entreprises) :</strong> Prise en compte des enjeux environnementaux, sociaux et de gouvernance (ESG) dans la stratégie d'entreprise.</li>
+      <li><strong>Télétravail & modes hybrides :</strong> 36% des salariés jugent les pratiques managériales en dégradation. Management à distance = enjeu majeur.</li>
+      <li><strong>Transformation digitale :</strong> IA générative, automatisation, impact sur les métiers, requalification des salariés.</li>
+      <li><strong>CSRD :</strong> Reporting extra-financier obligatoire — nouvelles contraintes pour les grandes entreprises dès 2028.</li>
+      <li><strong>Start-up & licornes :</strong> Entreprise valorisée > 1 milliard $. France = 2e écosystème tech en Europe (Station F, BPI France).</li>
+      <li><strong>Inflation managériale :</strong> Hausse des coûts de production, pression sur les marges, stratégies de pricing.</li>
+      <li><strong>Management intergénérationnel :</strong> Cohabitation Boomers, Gen X, Millennials, Gen Z au travail.</li>
+      <li><strong>Agents IA autonomes :</strong> 67% des dirigeants envisagent leur adoption en 2025 (BCG). Enjeu de compétitivité.</li>
+    </ul>
+  </div>
+
+  <!-- INSTITUTIONS -->
+  <div class="card">
+    <div class="card-title">🏛️ Institutions & organisations à connaître</div>
+    <div class="two-col">
+      <ul class="item-list">
+        <li><strong>ONU</strong> — Organisation des Nations Unies</li>
+        <li><strong>FMI</strong> — Fonds Monétaire International</li>
+        <li><strong>BM</strong> — Banque Mondiale</li>
+        <li><strong>OMC</strong> — Organisation Mondiale du Commerce</li>
+        <li><strong>BCE</strong> — Banque Centrale Européenne</li>
+        <li><strong>G7 / G20</strong> — Groupes pays industrialisés</li>
+      </ul>
+      <ul class="item-list">
+        <li><strong>OCDE</strong> — Organisation Coopération Développement Économique</li>
+        <li><strong>OTAN</strong> — Alliance militaire atlantique</li>
+        <li><strong>UE</strong> — 27 membres, Parlement/Commission/Conseil</li>
+        <li><strong>France Travail</strong> — ex-Pôle Emploi (depuis 2024)</li>
+        <li><strong>BPI France</strong> — banque publique investissement</li>
+        <li><strong>CAC 40</strong> — indice boursier 40 plus grandes entreprises fr.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- QUIZ CULTURE -->
+  <div class="card">
+    <div class="card-title">🧠 Quiz express Culture Générale</div>
+    <div id="quiz-culture-container"></div>
+  </div>
+</div>
+
+
+<!-- ============ FRANÇAIS ============ -->
+<div id="tab-francais" class="tab-content">
+  <div class="section-header">
+    <div class="section-icon c2">📝</div>
+    <div>
+      <div class="section-title">Compréhension & Expression Écrite en Français</div>
+      <div class="section-desc">50 questions — Expression (35q) + Compréhension (15q)</div>
+    </div>
+  </div>
+
+  <div class="highlight-box warn">
+    <strong>⚠️ Piège classique :</strong> 35 questions d'expression (orthographe, grammaire, conjugaison, vocab) + 15 questions de compréhension de texte. Évite les fautes bêtes d'accord !
+  </div>
+
+  <!-- ACCORDS -->
+  <div class="card">
+    <div class="card-title">✅ Accords essentiels — Les règles à ne pas rater</div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Accord du participe passé avec AVOIR <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        S'accorde avec le COD <strong>si le COD est placé AVANT le verbe</strong>.<br>
+        ✅ "Les lettres qu'il <u>a écrites</u>" (COD "lettres" avant = accord)<br>
+        ✅ "Il a <u>écrit</u> des lettres" (COD après = pas d'accord)<br>
+        <div class="highlight-box info" style="margin-top:8px;">Astuce : demande "quoi ?" ou "qui ?" après le verbe → si la réponse est avant → accorde.</div>
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Accord du participe passé avec ÊTRE <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        S'accorde toujours avec le <strong>sujet</strong>.<br>
+        ✅ "Elles sont <u>parties</u>" / "Ils sont <u>arrivés</u>"<br>
+        Verbes avec être : naître, mourir, aller, venir, partir, arriver, entrer, sortir, tomber, rester, monter, descendre... et tous les verbes pronominaux.
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Accord sujet-verbe (pièges courants) <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        🔸 <strong>Ni...ni</strong> → pluriel : "Ni Paul ni Pierre ne <u>sont</u> venus."<br>
+        🔸 <strong>La plupart de</strong> → pluriel : "La plupart des étudiants <u>réussissent</u>."<br>
+        🔸 <strong>Chacun / chacune</strong> → singulier : "Chacun <u>fait</u> de son mieux."<br>
+        🔸 <strong>Collectif + complément</strong> : "Une équipe de joueurs <u>est</u>/<u>sont</u> prêts" → accord avec le sens.<br>
+        🔸 <strong>C'est / ce sont</strong> : "C'est eux" ou "Ce sont eux" (les deux admis).
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Accord de l'adjectif <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        S'accorde avec le nom auquel il se rapporte (genre + nombre).<br>
+        🔸 Adjectif de couleur composé = invariable : "des robes <u>bleu clair</u>"<br>
+        🔸 Couleur nom commun = invariable : "des yeux <u>marron</u>", "des tapis <u>orange</u>"<br>
+        🔸 <strong>Demi</strong> avant nom = invariable : "<u>demi</u>-heure" ; après = accord : "deux heures et <u>demie</u>"
+      </div>
+    </div>
+  </div>
+
+  <!-- PRONOMS -->
+  <div class="card">
+    <div class="card-title">🔤 Pronoms — Tableau de bord</div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Pronoms personnels COD / COI <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        <strong>COD</strong> (répond à "qui ?" / "quoi ?") : me, te, le, la, nous, vous, les<br>
+        ✅ "Je <u>le</u> vois" (le = Paul)<br><br>
+        <strong>COI</strong> (répond à "à qui ?" / "à quoi ?") : me, te, lui, nous, vous, leur<br>
+        ✅ "Je <u>lui</u> parle" (lui = à Paul)<br><br>
+        🔸 <strong>Y</strong> = remplace lieu ou complément introduit par "à" (chose)<br>
+        🔸 <strong>En</strong> = remplace complément introduit par "de"
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Pronoms relatifs : qui, que, dont, où <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        <strong>Qui</strong> = sujet : "L'homme <u>qui</u> parle est grand."<br>
+        <strong>Que</strong> = COD : "Le livre <u>que</u> tu lis est intéressant."<br>
+        <strong>Dont</strong> = complément introduit par "de" : "L'ami <u>dont</u> je te parle."<br>
+        <strong>Où</strong> = lieu ou temps : "La ville <u>où</u> il vit / Le jour <u>où</u> il est arrivé."<br>
+        <strong>Lequel/laquelle/lesquels</strong> = après préposition : "L'outil <u>avec lequel</u> il travaille."
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Pronoms démonstratifs & possessifs <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        <strong>Démonstratifs</strong> : celui, celle, ceux, celles (+ ci/là)<br>
+        <strong>Possessifs</strong> : le mien, le tien, le sien, le nôtre, le vôtre, le leur<br>
+        ⚠️ "Notre" (adj.) vs "le nôtre" (pronom) — accent circonflexe sur le pronom !
+      </div>
+    </div>
+  </div>
+
+  <!-- CONJUGAISON -->
+  <div class="card">
+    <div class="card-title">⏰ Conjugaison — Temps à maîtriser absolument</div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Subjonctif présent — verbes irréguliers <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        Utilisé après : "bien que", "pour que", "quoique", "bien que", "à condition que", "vouloir que"...<br><br>
+        <strong>Être :</strong> que je <u>sois</u>, que tu sois, qu'il <u>soit</u>, que nous <u>soyons</u><br>
+        <strong>Avoir :</strong> que j'<u>aie</u>, que tu aies, qu'il <u>ait</u>, que nous <u>ayons</u><br>
+        <strong>Aller :</strong> que j'<u>aille</u>, que nous <u>allions</u><br>
+        <strong>Faire :</strong> que je <u>fasse</u>, que nous <u>fassions</u><br>
+        <strong>Pouvoir :</strong> que je <u>puisse</u><br>
+        <strong>Savoir :</strong> que je <u>sache</u>
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Conditionnel — formation & usages <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        <strong>Formation :</strong> radical du futur + terminaisons imparfait (-ais, -ais, -ait, -ions, -iez, -aient)<br>
+        ✅ "Il <u>viendrait</u>" = viendr- + -ait<br><br>
+        <strong>Usages :</strong> hypothèse, politesse, information non confirmée<br>
+        "Le président <u>aurait</u> signé l'accord." (information non vérifiée = conditionnel journalistique)
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Confusions classiques à éviter <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        🔸 <strong>a / à</strong> : "il a" (avoir) vs "à" (préposition) → remplacer par "avait"<br>
+        🔸 <strong>ou / où</strong> : "ou" = liaison ; "où" = lieu/temps<br>
+        🔸 <strong>et / est</strong> : "et" = liaison ; "est" = être → remplacer par "était"<br>
+        🔸 <strong>ce / se</strong> : "ce livre" (démonstratif) / "il se lève" (pronom réfléchi)<br>
+        🔸 <strong>ses / ces / c'est / s'est</strong> : bien distinguer selon le sens<br>
+        🔸 <strong>leur / leurs</strong> : "leur" adj. = invariable si modifie un singulier ; "leurs" si pluriel
+      </div>
+    </div>
+  </div>
+
+  <!-- VOCAB -->
+  <div class="card">
+    <div class="card-title">📚 Vocabulaire — Pièges ortho fréquents au Score IAE</div>
+    <ul class="item-list">
+      <li><strong>Oignon</strong> (pas ognon), <strong>nénuphar</strong>, <strong>haricot</strong> (pas d'élision : "le haricot")</li>
+      <li><strong>Davantage</strong> (plus) vs <strong>d'avantage</strong> (d'un avantage)</li>
+      <li><strong>Quand</strong> (temporel) / <strong>quant à</strong> (concernant) / <strong>qu'en</strong></li>
+      <li><strong>Pallier à</strong> ❌ → <strong>pallier</strong> qqch ✅ (verbe transitif direct)</li>
+      <li><strong>Prévenir</strong> (informer) ≠ <strong>guérir</strong> ; <strong>solutionner</strong> toléré (vs résoudre)</li>
+      <li><strong>Exigeant</strong>, <strong>intrigant</strong> (adj.) vs <strong>en exigeant</strong> (participe)</li>
+      <li><strong>Malgré que</strong> + subjonctif (soutenu, admis) vs <strong>bien que</strong> + subjonctif</li>
+    </ul>
+  </div>
+
+  <!-- QUIZ FRANÇAIS -->
+  <div class="card">
+    <div class="card-title">🧠 Quiz express Français</div>
+    <div id="quiz-francais-container"></div>
+  </div>
+</div>
+
+
+<!-- ============ ANGLAIS ============ -->
+<div id="tab-anglais" class="tab-content">
+  <div class="section-header">
+    <div class="section-icon c3">🇬🇧</div>
+    <div>
+      <div class="section-title">Compréhension & Expression Écrite en Anglais</div>
+      <div class="section-desc">50 questions — Grammaire + Vocabulaire + Compréhension de texte</div>
+    </div>
+  </div>
+
+  <div class="highlight-box success">
+    <strong>💡 Stratégie :</strong> Lis chaque texte en entier UNE FOIS, puis va aux questions. Ne traduis pas mot à mot — comprends le sens global d'abord. Pour la grammaire, élimine les options fausses.
+  </div>
+
+  <!-- VERBES IMPORTANTS -->
+  <div class="card">
+    <div class="card-title">🔑 100 verbes anglais essentiels <span class="tag tag-tip">À flashcard</span></div>
+    <div class="vocab-grid">
+      <div class="vocab-row"><span class="vocab-en">to achieve</span><span class="vocab-fr">atteindre, réussir</span></div>
+      <div class="vocab-row"><span class="vocab-en">to acknowledge</span><span class="vocab-fr">reconnaître</span></div>
+      <div class="vocab-row"><span class="vocab-en">to afford</span><span class="vocab-fr">avoir les moyens de</span></div>
+      <div class="vocab-row"><span class="vocab-en">to assess</span><span class="vocab-fr">évaluer</span></div>
+      <div class="vocab-row"><span class="vocab-en">to boost</span><span class="vocab-fr">stimuler, augmenter</span></div>
+      <div class="vocab-row"><span class="vocab-en">to carry out</span><span class="vocab-fr">mener à bien, réaliser</span></div>
+      <div class="vocab-row"><span class="vocab-en">to comply with</span><span class="vocab-fr">se conformer à</span></div>
+      <div class="vocab-row"><span class="vocab-en">to cope with</span><span class="vocab-fr">faire face à</span></div>
+      <div class="vocab-row"><span class="vocab-en">to deal with</span><span class="vocab-fr">traiter, gérer</span></div>
+      <div class="vocab-row"><span class="vocab-en">to decline</span><span class="vocab-fr">décliner, refuser</span></div>
+      <div class="vocab-row"><span class="vocab-en">to enhance</span><span class="vocab-fr">améliorer, renforcer</span></div>
+      <div class="vocab-row"><span class="vocab-en">to establish</span><span class="vocab-fr">établir, créer</span></div>
+      <div class="vocab-row"><span class="vocab-en">to expand</span><span class="vocab-fr">développer, s'étendre</span></div>
+      <div class="vocab-row"><span class="vocab-en">to face</span><span class="vocab-fr">faire face à</span></div>
+      <div class="vocab-row"><span class="vocab-en">to focus on</span><span class="vocab-fr">se concentrer sur</span></div>
+      <div class="vocab-row"><span class="vocab-en">to foster</span><span class="vocab-fr">encourager, favoriser</span></div>
+      <div class="vocab-row"><span class="vocab-en">to fund</span><span class="vocab-fr">financer</span></div>
+      <div class="vocab-row"><span class="vocab-en">to gain</span><span class="vocab-fr">obtenir, gagner</span></div>
+      <div class="vocab-row"><span class="vocab-en">to generate</span><span class="vocab-fr">générer, produire</span></div>
+      <div class="vocab-row"><span class="vocab-en">to highlight</span><span class="vocab-fr">souligner, mettre en avant</span></div>
+      <div class="vocab-row"><span class="vocab-en">to implement</span><span class="vocab-fr">mettre en œuvre</span></div>
+      <div class="vocab-row"><span class="vocab-en">to imply</span><span class="vocab-fr">impliquer, sous-entendre</span></div>
+      <div class="vocab-row"><span class="vocab-en">to improve</span><span class="vocab-fr">améliorer</span></div>
+      <div class="vocab-row"><span class="vocab-en">to increase</span><span class="vocab-fr">augmenter</span></div>
+      <div class="vocab-row"><span class="vocab-en">to influence</span><span class="vocab-fr">influencer</span></div>
+      <div class="vocab-row"><span class="vocab-en">to involve</span><span class="vocab-fr">impliquer, nécessiter</span></div>
+      <div class="vocab-row"><span class="vocab-en">to launch</span><span class="vocab-fr">lancer</span></div>
+      <div class="vocab-row"><span class="vocab-en">to lead to</span><span class="vocab-fr">mener à, conduire à</span></div>
+      <div class="vocab-row"><span class="vocab-en">to maintain</span><span class="vocab-fr">maintenir</span></div>
+      <div class="vocab-row"><span class="vocab-en">to manage</span><span class="vocab-fr">gérer, diriger</span></div>
+      <div class="vocab-row"><span class="vocab-en">to measure</span><span class="vocab-fr">mesurer</span></div>
+      <div class="vocab-row"><span class="vocab-en">to meet (deadline)</span><span class="vocab-fr">respecter (délai)</span></div>
+      <div class="vocab-row"><span class="vocab-en">to merge</span><span class="vocab-fr">fusionner</span></div>
+      <div class="vocab-row"><span class="vocab-en">to obtain</span><span class="vocab-fr">obtenir</span></div>
+      <div class="vocab-row"><span class="vocab-en">to overcome</span><span class="vocab-fr">surmonter</span></div>
+      <div class="vocab-row"><span class="vocab-en">to prevent</span><span class="vocab-fr">empêcher, prévenir</span></div>
+      <div class="vocab-row"><span class="vocab-en">to promote</span><span class="vocab-fr">promouvoir, encourager</span></div>
+      <div class="vocab-row"><span class="vocab-en">to provide</span><span class="vocab-fr">fournir, offrir</span></div>
+      <div class="vocab-row"><span class="vocab-en">to raise</span><span class="vocab-fr">lever, soulever, augmenter</span></div>
+      <div class="vocab-row"><span class="vocab-en">to reduce</span><span class="vocab-fr">réduire</span></div>
+      <div class="vocab-row"><span class="vocab-en">to rely on</span><span class="vocab-fr">compter sur, dépendre de</span></div>
+      <div class="vocab-row"><span class="vocab-en">to report</span><span class="vocab-fr">rapporter, signaler</span></div>
+      <div class="vocab-row"><span class="vocab-en">to require</span><span class="vocab-fr">nécessiter, exiger</span></div>
+      <div class="vocab-row"><span class="vocab-en">to seek</span><span class="vocab-fr">chercher, rechercher</span></div>
+      <div class="vocab-row"><span class="vocab-en">to set up</span><span class="vocab-fr">créer, mettre en place</span></div>
+      <div class="vocab-row"><span class="vocab-en">to shift</span><span class="vocab-fr">déplacer, faire évoluer</span></div>
+      <div class="vocab-row"><span class="vocab-en">to support</span><span class="vocab-fr">soutenir, appuyer</span></div>
+      <div class="vocab-row"><span class="vocab-en">to tackle</span><span class="vocab-fr">s'attaquer à</span></div>
+      <div class="vocab-row"><span class="vocab-en">to target</span><span class="vocab-fr">cibler</span></div>
+      <div class="vocab-row"><span class="vocab-en">to trigger</span><span class="vocab-fr">déclencher</span></div>
+    </div>
+  </div>
+
+  <!-- VOCAB BUSINESS -->
+  <div class="card">
+    <div class="card-title">💼 Vocabulaire business anglais <span class="tag tag-key">Score IAE</span></div>
+    <div class="vocab-grid">
+      <div class="vocab-row"><span class="vocab-en">stakeholder</span><span class="vocab-fr">partie prenante</span></div>
+      <div class="vocab-row"><span class="vocab-en">turnover</span><span class="vocab-fr">chiffre d'affaires / rotation</span></div>
+      <div class="vocab-row"><span class="vocab-en">earnings</span><span class="vocab-fr">bénéfices, revenus</span></div>
+      <div class="vocab-row"><span class="vocab-en">workforce</span><span class="vocab-fr">main-d'œuvre</span></div>
+      <div class="vocab-row"><span class="vocab-en">merger</span><span class="vocab-fr">fusion (d'entreprises)</span></div>
+      <div class="vocab-row"><span class="vocab-en">acquisition</span><span class="vocab-fr">rachat, acquisition</span></div>
+      <div class="vocab-row"><span class="vocab-en">sustainability</span><span class="vocab-fr">durabilité</span></div>
+      <div class="vocab-row"><span class="vocab-en">leverage</span><span class="vocab-fr">levier, tirer parti</span></div>
+      <div class="vocab-row"><span class="vocab-en">downturn</span><span class="vocab-fr">ralentissement économique</span></div>
+      <div class="vocab-row"><span class="vocab-en">benchmark</span><span class="vocab-fr">référence, repère</span></div>
+      <div class="vocab-row"><span class="vocab-en">outlook</span><span class="vocab-fr">perspective, prévision</span></div>
+      <div class="vocab-row"><span class="vocab-en">shortfall</span><span class="vocab-fr">déficit, manque</span></div>
+    </div>
+  </div>
+
+  <!-- GRAMMAIRE ANGLAISE -->
+  <div class="card">
+    <div class="card-title">📐 Grammaire anglaise — Points clés</div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Articles : a / an / the / ø <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        <strong>a/an</strong> = première mention, chose non spécifique. "an" devant voyelle <em>sonore</em>.<br>
+        ✅ "an hour" (h muet), "a university" (se dit "you-")<br>
+        <strong>the</strong> = chose spécifique, déjà mentionnée, unique<br>
+        <strong>ø</strong> = pas d'article devant : noms propres, matières, repas, pays (sauf the UK, the USA, the Netherlands)
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Temps verbaux — les essentiels <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        <strong>Present Simple</strong> = habitudes, vérités générales<br>
+        <strong>Present Continuous</strong> = action en cours (be + -ing)<br>
+        <strong>Present Perfect</strong> = action passée avec résultat présent (have + PP)<br>
+        "I have just finished" / "She has worked here for 3 years."<br>
+        <strong>Past Simple</strong> = action terminée à un moment précis<br>
+        ⚠️ Pas de "since/for" avec le past simple en anglais britannique
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Comparatifs & superlatifs <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        1 syllabe : <strong>big → bigger → the biggest</strong><br>
+        2 syllabes en -y : <strong>happy → happier → the happiest</strong><br>
+        3+ syllabes : <strong>important → more important → the most important</strong><br>
+        Irréguliers : good/better/the best — bad/worse/the worst — far/farther/the farthest
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Modaux — nuances importantes <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        <strong>can/could</strong> = capacité, possibilité<br>
+        <strong>may/might</strong> = permission, éventualité (might = moins certain)<br>
+        <strong>must</strong> = obligation (interne) / "must not" = interdiction<br>
+        <strong>have to / need to</strong> = obligation (externe)<br>
+        <strong>should/ought to</strong> = conseil, recommandation<br>
+        <strong>would</strong> = conditionnel, politesse ("Would you like...?")
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Confusions courantes anglais <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        🔸 <strong>much/many</strong> : much = indénombrable (much money) ; many = dénombrable (many people)<br>
+        🔸 <strong>few/a few</strong> : few = presque aucun (négatif) ; a few = quelques-uns (positif)<br>
+        🔸 <strong>little/a little</strong> : idem avec indénombrables<br>
+        🔸 <strong>make vs do</strong> : make = créer (make a decision) ; do = effectuer (do homework)<br>
+        🔸 <strong>say vs tell</strong> : say + parole ; tell + personne ("tell me", "say something")
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ ANGLAIS -->
+  <div class="card">
+    <div class="card-title">🧠 Quiz express Anglais</div>
+    <div id="quiz-anglais-container"></div>
+  </div>
+</div>
+
+
+<!-- ============ LOGIQUE / MATHS ============ -->
+<div id="tab-logique" class="tab-content">
+  <div class="section-header">
+    <div class="section-icon c4">🧮</div>
+    <div>
+      <div class="section-title">Raisonnement Logique & Numérique</div>
+      <div class="section-desc">20 questions — Calcul algébrique, géométrie, probabilités, suites logiques</div>
+    </div>
+  </div>
+
+  <div class="highlight-box warn">
+    <strong>⚠️ Attention :</strong> Seulement 20 questions mais très chronophages ! Ne passe pas trop de temps sur une question. Coche une réponse au hasard plutôt que de rester bloqué (pas de pénalité).
+  </div>
+
+  <!-- CALCUL ALGÉBRIQUE -->
+  <div class="card">
+    <div class="card-title">➕ Calcul algébrique — Rappels express <span class="tag tag-math">Maths</span></div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Identités remarquables <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        <div class="formula-box">(a + b)² = a² + 2ab + b²</div>
+        <div class="formula-box">(a - b)² = a² - 2ab + b²</div>
+        <div class="formula-box">(a + b)(a - b) = a² - b²</div>
+        <div class="formula-note">Astuce : mémorise-les, elles servent souvent à factoriser ou développer vite.</div>
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Équations du 1er et 2ème degré <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        <strong>1er degré :</strong> ax + b = 0 → x = -b/a<br><br>
+        <strong>2ème degré :</strong> ax² + bx + c = 0<br>
+        <div class="formula-box">Δ = b² - 4ac</div>
+        <ul class="item-list" style="margin-top:8px;">
+          <li>Δ > 0 → 2 solutions : x = (-b ± √Δ) / 2a</li>
+          <li>Δ = 0 → 1 solution : x = -b / 2a</li>
+          <li>Δ < 0 → pas de solution réelle</li>
+        </ul>
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Pourcentages & variations <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        <div class="formula-box">Taux de variation = (V_final - V_initial) / V_initial × 100</div>
+        🔸 Augmentation de 20% puis baisse de 20% ≠ retour à la valeur initiale !<br>
+        (×1,2) puis (×0,8) = ×0,96 → perte de 4%<br><br>
+        🔸 <strong>Coefficient multiplicateur</strong> : +30% → ×1,3 ; -15% → ×0,85<br>
+        🔸 Pour trouver la valeur initiale : V_initial = V_final / coeff multiplicateur
+      </div>
+    </div>
+  </div>
+
+  <!-- GÉOMÉTRIE -->
+  <div class="card">
+    <div class="card-title">📐 Géométrie — Formules indispensables</div>
+    <div class="two-col">
+      <div>
+        <div class="card-title" style="font-size:12px; color: var(--muted); margin-bottom:8px;">AIRES</div>
+        <div class="formula-box">Carré : a²</div>
+        <div class="formula-box">Rectangle : l × L</div>
+        <div class="formula-box">Triangle : (base × hauteur) / 2</div>
+        <div class="formula-box">Cercle : π × r²</div>
+        <div class="formula-box">Trapèze : (a + b) × h / 2</div>
+      </div>
+      <div>
+        <div class="card-title" style="font-size:12px; color: var(--muted); margin-bottom:8px;">VOLUMES & PYTHAGORE</div>
+        <div class="formula-box">Cube : a³</div>
+        <div class="formula-box">Cylindre : π × r² × h</div>
+        <div class="formula-box">Sphère : (4/3) × π × r³</div>
+        <div class="formula-box">Pythagore : a² + b² = c²</div>
+        <div class="formula-box">Périmètre cercle : 2πr</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUITES -->
+  <div class="card">
+    <div class="card-title">🔢 Suites & Statistiques</div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Suite arithmétique <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        Chaque terme = terme précédent + raison (r)
+        <div class="formula-box">uₙ = u₀ + n × r</div>
+        <div class="formula-box">Somme des n+1 premiers termes : S = (n+1) × (u₀ + uₙ) / 2</div>
+        Exemple : 2, 5, 8, 11... → r = 3, u₀ = 2, u₁₀ = 2 + 10×3 = 32
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Suite géométrique <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        Chaque terme = terme précédent × raison (q)
+        <div class="formula-box">uₙ = u₀ × qⁿ</div>
+        Exemple : 3, 6, 12, 24... → q = 2, u₀ = 3, u₅ = 3 × 2⁵ = 96
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Moyenne, médiane, mode <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        <strong>Moyenne</strong> = somme des valeurs / nombre de valeurs<br>
+        <strong>Médiane</strong> = valeur centrale (série classée par ordre) — si n pair : moyenne des 2 valeurs centrales<br>
+        <strong>Mode</strong> = valeur la plus fréquente<br>
+        <strong>Étendue</strong> = max - min<br>
+        <strong>Variance</strong> = moyenne des carrés des écarts à la moyenne
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Probabilités de base <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        <div class="formula-box">P(A) = nombre de cas favorables / nombre de cas possibles</div>
+        🔸 P(A) toujours entre 0 et 1<br>
+        🔸 P(A ∪ B) = P(A) + P(B) - P(A ∩ B)<br>
+        🔸 Si A et B indépendants : P(A ∩ B) = P(A) × P(B)<br>
+        🔸 Complémentaire : P(Ā) = 1 - P(A)
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGIQUE -->
+  <div class="card">
+    <div class="card-title">🧩 Raisonnement logique — Types de questions</div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Suites logiques de chiffres <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        Cherche : +n, ×n, alternance, carrés, Fibonacci...<br>
+        Exemples :<br>
+        🔸 1, 4, 9, 16, 25... → carrés parfaits (n²)<br>
+        🔸 1, 1, 2, 3, 5, 8, 13... → Fibonacci (somme des 2 précédents)<br>
+        🔸 2, 6, 18, 54... → ×3 (géométrique de raison 3)<br>
+        🔸 1, 2, 4, 7, 11, 16... → différences : +1, +2, +3, +4, +5
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Syllogismes & raisonnement <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        Méthode : 1) Lis les deux prémisses. 2) Déduis uniquement ce qui est logiquement nécessaire. 3) Ne rajoute pas de connaissance externe.<br><br>
+        Exemple :<br>
+        "Tous les A sont B. X est A. Donc X est B." ✅<br>
+        "Certains A sont B. X est A. Donc X est B." ❌ (pas forcément !)<br><br>
+        ⚠️ Attention aux quantificateurs : "tous", "certains", "aucun", "quelques-uns"
+      </div>
+    </div>
+    <div class="accordion">
+      <button class="accordion-header" onclick="toggleAccordion(this)">Conversions & unités <span class="chevron">▼</span></button>
+      <div class="accordion-body">
+        <div class="formula-box">1 km = 1 000 m | 1 m = 100 cm | 1 cm = 10 mm</div>
+        <div class="formula-box">1 kg = 1 000 g | 1 t = 1 000 kg</div>
+        <div class="formula-box">1 L = 1 000 mL = 1 dm³</div>
+        <div class="formula-box">Vitesse : d = v × t | Débit : Q = V / t</div>
+        🔸 Conversion km/h → m/s : diviser par 3,6<br>
+        🔸 1 heure = 60 min = 3 600 s
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ LOGIQUE -->
+  <div class="card">
+    <div class="card-title">🧠 Quiz express Logique & Maths</div>
+    <div id="quiz-logique-container"></div>
+  </div>
+</div>
+
+</div><!-- end container -->
+
+<script>
+// ===== TAB SWITCHING =====
+function switchTab(tabName, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tabName).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ===== ACCORDION =====
+function toggleAccordion(btn) {
+  const body = btn.nextElementSibling;
+  const chevron = btn.querySelector('.chevron');
+  const isOpen = btn.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+  chevron.classList.toggle('open', !isOpen);
+}
+
+// ===== QUIZ ENGINE =====
+const quizData = {
+  culture: [
+    { q: "Quelle directive européenne oblige les grandes entreprises à publier un reporting de durabilité extra-financier ?", opts: ["RGPD", "CSRD", "MiFID II", "Basel III", "GDPR"], ans: 1, exp: "La CSRD (Corporate Sustainability Reporting Directive) impose aux grandes entreprises un reporting ESG obligatoire, applicable progressivement à partir de 2028." },
+    { q: "France Travail a remplacé quelle institution depuis le 1er janvier 2024 ?", opts: ["ANPE", "UNEDIC", "Pôle Emploi", "CAF", "INSEE"], ans: 2, exp: "France Travail a remplacé Pôle Emploi le 1er janvier 2024 dans l'objectif d'atteindre le plein emploi." },
+    { q: "Quel est l'objectif d'inflation de la BCE (Banque Centrale Européenne) ?", opts: ["0%", "1%", "2%", "3%", "5%"], ans: 2, exp: "La BCE vise un taux d'inflation de 2% à moyen terme en zone euro." },
+    { q: "Que signifie l'acronyme RSE en management ?", opts: ["Réseau Social d'Entreprise", "Responsabilité Sociétale des Entreprises", "Résultats Sur l'Emploi", "Règlement des Salaires en Europe", "Revenu de Solidarité Économique"], ans: 1, exp: "RSE = Responsabilité Sociétale (ou Sociale) des Entreprises : prise en compte des enjeux environnementaux, sociaux et de gouvernance (ESG)." },
+    { q: "Quel est approximativement le taux de chômage en France fin 2024 ?", opts: ["4,5%", "6%", "7,3%", "10%", "12%"], ans: 2, exp: "Le taux de chômage en France était d'environ 7,3% fin 2024, en recul par rapport aux années précédentes." },
+  ],
+  francais: [
+    { q: "Choisissez la bonne phrase : ", opts: ["Les lettres qu'il a écrit sont belles.", "Les lettres qu'il a écrites sont belles.", "Les lettres qu'il a écrit soient belles.", "Les lettres que il a écrites sont belles.", "Les lettre qu'il a écrites sont belles."], ans: 1, exp: "Le participe passé 'écrites' s'accorde avec le COD 'lettres' placé avant le verbe avoir → accord au féminin pluriel." },
+    { q: "Quelle est la bonne orthographe ?", opts: ["davantage de temps", "d'avantage de temps", "davantage des temps", "d'avantages de temps", "davantages de temps"], ans: 0, exp: "'Davantage' (= plus) est un adverbe, toujours en un mot. 'D'avantage' signifie 'd'un avantage particulier'." },
+    { q: "Complétez : 'Bien qu'il _____ fatigué, il a continué.'", opts: ["est", "soit", "serait", "était", "fût"], ans: 1, exp: "'Bien que' impose le subjonctif. Subjonctif présent de 'être' : 'soit'." },
+    { q: "Laquelle de ces phrases utilise correctement le pronom 'dont' ?", opts: ["L'ami dont je lui ai parlé.", "L'ami dont je t'en ai parlé.", "L'ami dont je t'ai parlé.", "L'ami de qui dont je t'ai parlé.", "L'ami à dont je t'ai parlé."], ans: 2, exp: "'Dont' remplace 'de + nom'. 'Je t'ai parlé de cet ami' → 'L'ami dont je t'ai parlé'. Pas de cumul avec 'de' ou 'en'." },
+    { q: "Quelle formulation est correcte ?", opts: ["Il faut pallier à ce problème.", "Il faut pallier ce problème.", "Il faut pallier avec ce problème.", "Il faut se pallier de ce problème.", "Il faut pallier pour ce problème."], ans: 1, exp: "'Pallier' est un verbe transitif direct : on pallie quelque chose (pas 'pallier à'). C'est une faute très fréquente !" },
+  ],
+  anglais: [
+    { q: "Choose the correct sentence:", opts: ["She work in London since 2020.", "She has worked in London since 2020.", "She worked in London since 2020.", "She is working in London since 2020.", "She works in London since 2020."], ans: 1, exp: "Use Present Perfect (have + past participle) with 'since' for an action that started in the past and continues now." },
+    { q: "What does 'to cope with' mean?", opts: ["to compete with", "to deal/manage with", "to cooperate with", "to copy from", "to comply with"], ans: 1, exp: "'To cope with' = faire face à, gérer (une difficulté). Ex: 'She coped with the pressure very well.'" },
+    { q: "Fill in the blank: 'There were ___ people at the conference, so it was disappointing.'", opts: ["a little", "much", "few", "a few", "less"], ans: 2, exp: "'Few' (sans article) = very little, almost none → negative nuance. 'A few' = some → positive nuance. People = countable → use few/many." },
+    { q: "Choose the correct article: '___ University of Paris is prestigious.'", opts: ["A", "An", "The", "Ø (no article)", "Some"], ans: 2, exp: "Use 'the' with specific institutions. 'The University of Paris' refers to a specific, unique institution." },
+    { q: "Which sentence uses the correct comparative form?", opts: ["This report is more better than the previous.", "This report is more good than the previous.", "This report is gooder than the previous.", "This report is better than the previous.", "This report is best than the previous."], ans: 3, exp: "'Good' is irregular: good → better → the best. Never use 'more good' or 'more better'." },
+  ],
+  logique: [
+    { q: "Quelle est la suite logique de : 2, 6, 18, 54, ... ?", opts: ["108", "162", "108", "200", "78"], ans: 1, exp: "Suite géométrique de raison 3 : chaque terme est multiplié par 3. 54 × 3 = 162." },
+    { q: "Un article coûte 120€ après une remise de 20%. Quel était son prix initial ?", opts: ["140€", "144€", "150€", "96€", "160€"], ans: 2, exp: "Si -20%, le prix final = 80% du prix initial. Donc : 120 / 0,8 = 150€." },
+    { q: "Un cercle a un rayon de 5 cm. Quelle est son aire ? (π ≈ 3,14)", opts: ["15,7 cm²", "31,4 cm²", "78,5 cm²", "157 cm²", "25 cm²"], ans: 2, exp: "Aire = π × r² = 3,14 × 5² = 3,14 × 25 = 78,5 cm²." },
+    { q: "Dans une classe de 30 élèves, 60% sont des filles. Combien y a-t-il de garçons ?", opts: ["12", "18", "15", "20", "10"], ans: 0, exp: "Filles : 60% × 30 = 18. Garçons : 30 - 18 = 12." },
+    { q: "Complète la suite : 1, 1, 2, 3, 5, 8, ___, 21", opts: ["10", "11", "12", "13", "14"], ans: 3, exp: "Suite de Fibonacci : chaque terme = somme des 2 précédents. 5 + 8 = 13." },
+  ]
+};
+
+const quizState = {};
+
+function initQuiz(type) {
+  const container = document.getElementById('quiz-' + type + '-container');
+  if (!container) return;
+  quizState[type] = { index: 0, score: 0, answered: false };
+  renderQuestion(type);
+}
+
+function renderQuestion(type) {
+  const container = document.getElementById('quiz-' + type + '-container');
+  const state = quizState[type];
+  const data = quizData[type];
+  if (state.index >= data.length) {
+    container.innerHTML = `
+      <div style="text-align:center; padding:20px;">
+        <div style="font-size:32px; margin-bottom:8px;">🎉</div>
+        <div style="font-family:'Syne',sans-serif; font-size:18px; font-weight:700; color:var(--accent3);">Score : ${state.score}/${data.length}</div>
+        <div style="color:var(--muted); font-size:13px; margin-top:4px;">${state.score === data.length ? 'Parfait !' : state.score >= data.length * 0.6 ? 'Bien joué !' : 'Continue à réviser !'}</div>
+        <button onclick="resetQuiz('${type}')" style="margin-top:14px; padding:8px 20px; background:linear-gradient(135deg,var(--accent1),#9b8ff0); color:#fff; border:none; border-radius:8px; cursor:pointer; font-family:'Syne',sans-serif; font-size:13px; font-weight:600;">↺ Recommencer</button>
+      </div>`;
+    return;
+  }
+  const q = data[state.index];
+  const optsHtml = q.opts.map((o, i) => `<button class="quiz-opt" onclick="answerQuiz('${type}', ${i})">${o}</button>`).join('');
+  container.innerHTML = `
+    <div class="quiz-card" style="background:transparent;border:none;padding:0;">
+      <div style="font-size:11px; color:var(--muted); margin-bottom:8px;">Question ${state.index + 1}/${data.length}</div>
+      <div class="quiz-q">${q.q}</div>
+      <div class="quiz-options" id="opts-${type}">${optsHtml}</div>
+      <div class="quiz-feedback" id="fb-${type}"></div>
+      <button class="quiz-next-btn" id="next-${type}" onclick="nextQuestion('${type}')">Question suivante →</button>
+    </div>`;
+}
+
+function answerQuiz(type, idx) {
+  const state = quizState[type];
+  if (state.answered) return;
+  state.answered = true;
+  const q = quizData[type][state.index];
+  const opts = document.querySelectorAll('#opts-' + type + ' .quiz-opt');
+  const fb = document.getElementById('fb-' + type);
+  const nextBtn = document.getElementById('next-' + type);
+  opts.forEach((o, i) => {
+    o.disabled = true;
+    if (i === q.ans) o.classList.add('correct');
+    else if (i === idx && idx !== q.ans) o.classList.add('wrong');
+  });
+  if (idx === q.ans) state.score++;
+  fb.innerHTML = (idx === q.ans ? '✅ ' : '❌ ') + q.exp;
+  fb.classList.add('show');
+  nextBtn.classList.add('show');
+}
+
+function nextQuestion(type) {
+  quizState[type].index++;
+  quizState[type].answered = false;
+  renderQuestion(type);
+}
+
+function resetQuiz(type) {
+  quizState[type] = { index: 0, score: 0, answered: false };
+  renderQuestion(type);
+}
+
+// Init all quizzes
+['culture', 'francais', 'anglais', 'logique'].forEach(initQuiz);
+</script>
+</body>
+</html>
